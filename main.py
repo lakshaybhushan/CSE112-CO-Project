@@ -292,18 +292,3 @@ if (ins[-1][0])!="hlt":
         quit()
 for i in finout:
     print(i)
-
-# Error Handling and Flags !! - Left only :) [keep smiling]
-'''
-a. Typos in instruction name or register name ------------------------------ done
-b. Use of undefined variables ---------------------------------------------- done
-c. Use of undefined labels ------------------------------------------------- done
-d. Illegal use of FLAGS register (Can be used in mov, but not others) ------ done 
-e. Illegal Immediate values (more than 8 bits) ----------------------------- done
-f. Misuse of labels as variables or vice-versa ----------------------------- done
-g. Variables not declared at the beginning --------------------------------- done
-h. Missing hlt instruction ------------------------------------------------- done
-i. hlt not being used as the last instruction ------------------------------ done
-1001000001100100
-okay
-''' 
