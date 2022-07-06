@@ -305,4 +305,5 @@ g. Variables not declared at the beginning --------------------------------- don
 h. Missing hlt instruction ------------------------------------------------- done
 i. hlt not being used as the last instruction ------------------------------ done
 1001000001100100
+okay
 ''' 
