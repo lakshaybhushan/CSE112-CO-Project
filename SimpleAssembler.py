@@ -292,3 +292,7 @@ if (ins[-1][0])!="hlt":
         quit()
 for i in finout:
     print(i)
+
+#Sameer Budhiraja
+#Twisha Kacker
+#Lakshay Bhushan
