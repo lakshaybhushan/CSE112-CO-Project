@@ -18,20 +18,20 @@ type_mov={"mov_imm":"100010","mov_reg":"10011"}
 
 binlist=[type_a, type_b, type_c, type_d, type_e, type_f, type_mov]
 
-# import sys
-# S = sys.stdin.read()
-# line = S.split("\n")
-# ins = []
-# for i in line:
-#     ele  = i.split()
-#     ins.append(ele)
-ins=[]
-filename=("SimpleAssembler.txt")
-f=open(filename,'r')
-instruct=f.readlines()
-for op in instruct:
-    temp=op.split()
-    ins.append(temp)
+import sys
+S = sys.stdin.read()
+line = S.split("\n")
+ins = []
+for i in line:
+    ele  = i.split()
+    ins.append(ele)
+# ins=[]
+# filename=("SimpleAssembler.txt")
+# f=open(filename,'r')
+# instruct=f.readlines()
+# for op in instruct:
+#     temp=op.split()
+#     ins.append(temp)
 count=0
 finout=[]
 hltcount=0
