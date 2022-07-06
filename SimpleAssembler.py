@@ -1,3 +1,4 @@
+import sys
 dict_op={"add":0, "sub":0,"xor":0, "or":0,"and":0,"mul":0,"mov":6,"rs":1,"ls":1,"div":2,"not":2,"cmp":2,"ld":3,"st":3,"jmp":4,"jlt":4, "jgt":4, "je":4, "hlt":5}
 
 dict_reg={"R0":"000","R1":"001","R2":"010","R3":"011","R4":"100","R5":"101","R6":"110","FLAGS":"111"}
@@ -18,7 +19,6 @@ type_mov={"mov_imm":"100010","mov_reg":"10011"}
 
 binlist=[type_a, type_b, type_c, type_d, type_e, type_f, type_mov]
 
-import sys
 S = sys.stdin.read()
 line = S.split("\n")
 ins = []
