@@ -26,7 +26,7 @@ for i in line:
     ele  = i.split()
     ins.append(ele)
 # ins=[]
-# filename=("SimpleAssembler.txt")
+# filename=("output.txt")
 # f=open(filename,'r')
 # instruct=f.readlines()
 # for op in instruct:
