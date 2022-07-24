@@ -19,19 +19,21 @@ type_mov={"mov_imm":"100010","mov_reg":"10011"}
 
 binlist=[type_a, type_b, type_c, type_d, type_e, type_f, type_mov]
 
-# S = sys.stdin.read()
-# line = S.split("\n")
-# ins = []
-# for i in line:
-#     ele  = i.split()
-#     ins.append(ele)
-ins=[]
-filename=("output.txt")
-f=open(filename,'r')
-instruct=f.readlines()
-for op in instruct:
-    temp=op.split()
-    ins.append(temp)
+S = sys.stdin.read()
+line = S.split("\n")
+ins = []
+for i in line:
+    ele  = i.split()
+    ins.append(ele)
+
+# ins=[]
+# filename=("output.txt")
+# f=open(filename,'r')
+# instruct=f.readlines()
+# for op in instruct:
+#     temp=op.split()
+#     ins.append(temp)
+
 count=0
 finout=[]
 hltcount=0
@@ -88,7 +90,7 @@ for sentence in ins:
         labelcount+=1
 for sentence in ins:
     sencount+=1
-    if hltcount==1 and sentence!=None:
+    if hltcount==1 and sentence!=None and len(sentence)!=0:
         print("Error: hlt is not the last instruction")
         quit()
     for keyw in dict_op:
@@ -215,6 +217,9 @@ for sentence in ins:
                     while zero<zeroes:
                         tempout+=("0")
                         zero+=1
+                    if len(labeldict)==0:
+                        print("Error in line:",sencount,", Label Not Defined")
+                        quit()
                     for addr in labeldict:
                         if sentence[word]==addr:
                             tempout+=str(labeldict[addr])
@@ -286,10 +291,24 @@ for sentence in ins:
                         print("Error in line:",sencount,", Opcode Error")
                         quit()
                 word+=1
-if (ins[-1][0])!="hlt":
-    if (ins[-1][0][-1]!=":"):
-        print("hlt not used")
-        quit()
+tempcount=-1
+tempexit=0
+while tempexit==0:
+    if len(ins[tempcount])!=0 and (ins[tempcount][0])!="hlt":
+        if (ins[tempcount][0][-1]!=":"):
+            print("hlt not used")
+            quit()
+        elif (ins[tempcount][1]!="hlt"):
+            print("hlt not used")
+            quit()
+        else:
+            tempexit=1
+    elif (len(ins[tempcount])==0):
+        tempcount-=1
+    else:
+        tempexit=1
+
+
 for i in finout:
     print(i)
 
