@@ -8,9 +8,9 @@ type_b={"ls":"01001","rs":"01000"}
 
 type_c={"not":"01101","cmp":"01110","div":"00111"}
 
-type_d={"ld":"0100","st":"00101"}
+type_d={"ld":"00100","st":"00101"}
 
-type_e={"jmp":"01111","jlt":"10000","jgt":"10010","je":"10010"}
+type_e={"jmp":"01111","jlt":"10000","jgt":"10001","je":"10010"}
 
 type_f={"hlt":"10011"}
 
@@ -263,7 +263,7 @@ for sentence in ins:
                         tempout+=str(imm)
                         finout.append(tempout)
                     else:
-                        tempout=str("0001000100")
+                        tempout=str("0001100000")
                         word-=1
                         for reg in dict_reg:
                             if reg==sentence[word]:

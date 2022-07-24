@@ -15,7 +15,7 @@ type_e={"jmp":"11111","jlt":"01100","jgt":"01101","je":"01111"}
 
 type_f={"hlt":"01010"}
 
-type_mov={"mov_imm":"100010","mov_reg":"10011"}
+type_mov={"mov_imm":"10010","mov_reg":"10011"}
 
 binlist=[type_a, type_b, type_c, type_d, type_e, type_f, type_mov]
 
