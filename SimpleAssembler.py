@@ -19,6 +19,8 @@ type_mov={"mov_imm":"100010","mov_reg":"10011"}
 
 binlist=[type_a, type_b, type_c, type_d, type_e, type_f, type_mov]
 
+
+
 # S = sys.stdin.read()
 # line = S.split("\n")
 # ins = []
