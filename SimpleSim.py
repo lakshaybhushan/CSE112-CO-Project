@@ -11,9 +11,6 @@ instruct=f.readlines()
 for op in instruct:
     temp=op.split()
     ins.append(temp)
-print("HELLO")
-
-print("AAAAAAABBBBB")
 
 
 
