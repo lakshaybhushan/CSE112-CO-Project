@@ -1,3 +1,5 @@
+import sys
+#import matplotlib.pyplot as plt
 def binDec(n):
     x=str(n)
     fin=0
@@ -17,18 +19,24 @@ vardict={}
 
 # opdict={"10000":"add","10001":"sub","10110":"mul","11010":"xor","11011":"or","11100":"and","11001":"ls","11000":"rs","11101":"not","11110":"cmp","10111":"div","10100":"ld","10101":"st","11111":"jmp","01100":"jlt","01101":"jgt","01111":"je","01010":"hlt","10010":"mov_imm","10011":"mov_reg"}
 
-# import sys
-# S = sys.stdin.read()
-# line = S.split("\n")
-# ins = []
-# for i in line:
-#     ele  = i.split()
-#     ins.append(ele)
+instruct = sys.stdin.readlines()
+ins = []
+for i in instruct:
+    ele  = i.split()
+    ins.append(ele)
 
-filename=("inputfile.txt")
-f=open(filename,'r')
-instruct=f.readlines()
-
+# filename=("inputfile.txt")
+# f=open(filename,'r')
+# instruct=f.readlines()
+# ins=[]
+# for op in instruct:
+#     temp=op.split()
+#     ins.append(temp)
+sentence=0
+testcount=0
+while sentence<len(instruct):
+    testcount+=1
+    sentence+=1
 counter=0
 sentence=0
 while sentence<len(instruct):
@@ -53,7 +61,6 @@ while sentence<len(instruct):
         else:
             regdict[r3]=regdict[r1]-regdict[r2]
             flagdict={"V":0,"L":0,"G":0,"E":0}
-        print(regdict[r3])
     elif opcode=="10110":   #MUL
         r1=str(instruct[sentence][7:10])
         r2=str(instruct[sentence][10:13])
@@ -64,28 +71,24 @@ while sentence<len(instruct):
             regdict[r3]=regdict[r3]-65536
         else:
             flagdict={"V":0,"L":0,"G":0,"E":0}
-        print(regdict[r3])
     elif opcode=="10110":   #XOR
         r1=str(instruct[sentence][7:10])
         r2=str(instruct[sentence][10:13])
         r3=str(instruct[sentence][13:16])
         regdict[r3]=regdict[r1]^regdict[r2]
         flagdict={"V":0,"L":0,"G":0,"E":0}
-        print(regdict[r3])
     elif opcode=="11011":   #OR
         r1=str(instruct[sentence][7:10])
         r2=str(instruct[sentence][10:13])
         r3=str(instruct[sentence][13:16])
         regdict[r3]=regdict[r1]|regdict[r2]
         flagdict={"V":0,"L":0,"G":0,"E":0}
-        print(regdict[r3])
     elif opcode=="11100":   #AND
         r1=str(instruct[sentence][7:10])
         r2=str(instruct[sentence][10:13])
         r3=str(instruct[sentence][13:16])
         regdict[r3]=regdict[r1]&regdict[r2]
         flagdict={"V":0,"L":0,"G":0,"E":0}
-        print(regdict[r3])
 
 
 #End of type A
@@ -96,7 +99,6 @@ while sentence<len(instruct):
         r2=str(instruct[sentence][13:16])
         regdict[r2]=~regdict[r1]
         flagdict={"V":0,"L":0,"G":0,"E":0}
-        print(regdict[r2])
     elif opcode=="11110":   #CMP
         flagdict={"V":0,"L":0,"G":0,"E":0}
         r1=str(instruct[sentence][10:13])
@@ -107,14 +109,12 @@ while sentence<len(instruct):
             flagdict["G"]=1
         else:
             flagdict["L"]=1
-        print(flagdict["L"],flagdict["G"],flagdict["E"])
     elif opcode=="10111":   #DIV
         r1=str(instruct[sentence][10:13])
         r2=str(instruct[sentence][13:16])
         regdict["000"]=regdict[r1]//regdict[r2]
         regdict["001"]=regdict[r1]%regdict[r2]
         flagdict={"V":0,"L":0,"G":0,"E":0}
-        print(regdict["000"],regdict["001"])
     elif opcode=="10011": #MOV_REG
         r1=str(instruct[sentence][10:13])
         r2=str(instruct[sentence][13:16])
@@ -124,7 +124,6 @@ while sentence<len(instruct):
             temp=8*flagdict["V"]+4*flagdict["L"]+2*flagdict["G"]+flagdict["E"]
             regdict[r2]=temp
         flagdict={"V":0,"L":0,"G":0,"E":0}
-        print(regdict[r2])
 
 
 #End of Type C
@@ -133,15 +132,16 @@ while sentence<len(instruct):
     elif opcode=="10100":   #LOAD
         r1=str(instruct[sentence][5:8])
         var=str(instruct[sentence][8:16])
-        r1=vardict[var]
+        if var not in vardict:
+            r1=0
+        else:
+            r1=vardict[var]
         flagdict={"V":0,"L":0,"G":0,"E":0}
-        print(r1)
     elif opcode=="10101":   #ST
         r1=str(instruct[sentence][5:8])
         var=str(instruct[sentence][8:16])
         vardict[var]=r1
         flagdict={"V":0,"L":0,"G":0,"E":0}
-        print(vardict[var])
     
 
 #End of Type D
@@ -154,7 +154,6 @@ while sentence<len(instruct):
         val=binDec(val)
         regdict[r1]=regdict[r1]>>val
         flagdict={"V":0,"L":0,"G":0,"E":0}
-        print(regdict[r1])
     elif opcode=="11001":   #LS
         r1=str(instruct[sentence][5:8])
         val=str(instruct[sentence][8:16])
@@ -162,15 +161,13 @@ while sentence<len(instruct):
         val=binDec(val)
         regdict[r2]=regdict[r1]<<val
         flagdict={"V":0,"L":0,"G":0,"E":0}
-        print(regdict[r1])
-    elif opcode=="11010":   #MOV_IMM
+    elif opcode=="10010":   #MOV_IMM
         r1=str(instruct[sentence][5:8])
         val=str(instruct[sentence][8:16])
         val=int(val)
         val=binDec(val)
         regdict[r1]=val
         flagdict={"V":0,"L":0,"G":0,"E":0}
-        print(regdict[r1])
 
 
 #End of Type B
@@ -228,15 +225,21 @@ while sentence<len(instruct):
             print("0",end="")
             zero+=1
         print(binout,end=" ")
+    print("000000000000",end="")
+    for i in flagdict:
+        print(flagdict[i],end="")
     print("")
-ins=[]
-for op in instruct:
-    temp=op.split()
-    ins.append(temp)
 for i in ins:
-    print(*i)
+    for j in i:
+        print(j)
 empty=256-counter
 i=0
 while i<empty:
     print("0000000000000000")
     i+=1
+
+# x,y=zip(*info)
+# plt.scatter(x,y)
+# plt.savefig('ques4.png')
+# for i in memory:
+#     print(i)
